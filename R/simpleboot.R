@@ -12,10 +12,10 @@
 ## methods are kind of hacked. -RDP
 
 
-hist.uclaboot <- function(x, do.rug = FALSE, xlab = "Bootstrap samples",
+hist.simpleboot <- function(x, do.rug = FALSE, xlab = "Bootstrap samples",
                           main = "", ...) {
-  if(!inherits(x, "uclaboot"))
-    stop("Only use on 'uclaboot' objects!")
+  if(!inherits(x, "simpleboot"))
+    stop("Only use on 'simpleboot' objects!")
   hist(x$t[, 1], xlab = xlab, main = main, ...)
   if(do.rug)
     rug(x$t[, 1])
@@ -38,10 +38,10 @@ perc.lm <- function(lm.boot.obj, p) {
 }
 
 perc <- function(boot.out, p = c(0.025, 0.975)) {
-  if(inherits(boot.out, "lm.uclaboot"))
+  if(inherits(boot.out, "lm.simpleboot"))
     return( perc.lm(boot.out, p) )
-  if(!inherits(boot.out, "uclaboot"))
-    stop("Only use this function on 'uclaboot' objects!")    
+  if(!inherits(boot.out, "simpleboot"))
+    stop("Only use this function on 'simpleboot' objects!")    
   if(any(p < 0) || any(p > 1))
     stop("Probabilities in 'p' must be between 0 and 1")
   if(!is.null(boot.out$student) && boot.out$student)
@@ -182,39 +182,39 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
 
 
 
-summary.lm.uclaboot <- function(object, ...) {
+summary.lm.simpleboot <- function(object, ...) {
   summary.object <- object
-  class(summary.object) <- "summary.lm.uclaboot"
+  class(summary.object) <- "summary.lm.simpleboot"
   params <- sapply(object$boot.list, "[[", "coef")        
   summary.object$stdev.params <- apply(params, 1, sd)
 
   summary.object
 }
 
-print.summary.lm.uclaboot <- function(x, ...) {    
-  print.lm.uclaboot(x)
+print.summary.lm.simpleboot <- function(x, ...) {    
+  print.lm.simpleboot(x)
   
   cat("Bootstrap SD's:\n")
   print.default(format(x$stdev.params), print.gap = 2, quote = FALSE)
   cat("\n")
 }
 
-print.lm.uclaboot <- function(x, ...) {
+print.lm.simpleboot <- function(x, ...) {
   cat("BOOTSTRAP OF LINEAR MODEL  (method = ", x$method, ")\n\n", sep = "")
   cat("Original Model Fit\n")
   cat("------------------")
   print(x$orig.lm)
 }
 
-fitted.lm.uclaboot <- function(object, ...) {
+fitted.lm.simpleboot <- function(object, ...) {
   samples(object, "fitted")
 }
 
-model.frame.lm.uclaboot <- function(formula, ...) {
+model.frame.lm.simpleboot <- function(formula, ...) {
   model.frame(formula$orig.lm)
 }
 
-plot.lm.uclaboot <- function(x, add = FALSE, ...) {
+plot.lm.simpleboot <- function(x, add = FALSE, ...) {
   if(ncol(model.frame(x)) > 2)
     stop("Cannot plot bootstrap regressions with dimension > 2")
   xpts <- x$new.xpts    
@@ -239,8 +239,8 @@ plot.lm.uclaboot <- function(x, add = FALSE, ...) {
 samples <- function(object, name = c("fitted", "coef", "rsquare", "rss")) {
   name <- match.arg(name)
   
-  if(!inherits(object, c("lm.uclaboot", "loess.uclaboot")))
-    stop("Only use with 'lm.uclaboot' or 'loess.uclaboot' object")
+  if(!inherits(object, c("lm.simpleboot", "loess.simpleboot")))
+    stop("Only use with 'lm.simpleboot' or 'loess.simpleboot' object")
   boot.list <- object$boot.list
   
   if(is.null(boot.list[[1]][[name]]))
@@ -266,7 +266,7 @@ lm.boot <- function(lm.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100,
   structure(list(method = ifelse(rows, "rows", "residuals"),
                  boot.list = boot.list, orig.lm = lm.object,
                  new.xpts = new.xpts, weights = weights),
-            class = "lm.uclaboot")
+            class = "lm.simpleboot")
 }
 
 lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
@@ -310,7 +310,7 @@ lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
 
 ## R^2 = (SYY - RSS) / SYY
 
-plot.loess.uclaboot <- function(x, add = FALSE, all.lines = FALSE, ...) {
+plot.loess.simpleboot <- function(x, add = FALSE, all.lines = FALSE, ...) {
   xpts <- x$new.xpts    
   bmat <- sapply(x$boot.list, "[[", "fitted")
   std <- apply(bmat, 1, sd, na.rm = TRUE)
@@ -336,7 +336,7 @@ plot.loess.uclaboot <- function(x, add = FALSE, all.lines = FALSE, ...) {
   invisible()          
 }
 
-print.loess.uclaboot <- function(x, ...) {
+print.loess.simpleboot <- function(x, ...) {
   cat("BOOTSTRAP OF LOESS (method = ", x$method, ")\n\n", sep = "")
   cat("Original Model Fit\n")
   cat("------------------\n")
@@ -357,11 +357,11 @@ loess.boot <- function(lo.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100, 
   boot.result$orig.loess <- lo.object
   boot.result$new.xpts <- new.xpts
   boot.result$R <- R
-  class(boot.result) <- c("loess.uclaboot")
+  class(boot.result) <- c("loess.simpleboot")
   boot.result
 }
 
-fitted.loess.uclaboot <- function(object, ...) {
+fitted.loess.simpleboot <- function(object, ...) {
   samples(object, "fitted")
 }
 
@@ -482,6 +482,6 @@ lo.boot.resample <- function(lo.object, R, rows, new.xpts, weights) {
 ##     b$sim <- "ordinary"
 ##     b$stype <- "i"
 ##     b$student <- student
-##     class(b) <- c("uclaboot", class(b))
+##     class(b) <- c("simpleboot", class(b))
 ##     b
 ## }
