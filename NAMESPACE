@@ -1,0 +1,13 @@
+S3method("hist", "simpleboot")
+S3method("summary", "lm.simpleboot")
+S3method("print", "summary.lm.simpleboot")
+S3method("print", "lm.simpleboot")
+S3method("fitted", "lm.simpleboot")
+S3method("model.frame", "lm.simpleboot")
+S3method("plot", "lm.simpleboot")
+S3method("plot", "loess.simpleboot")
+S3method("print", "loess.simpleboot")
+S3method("fitted", "loess.simpleboot")
+export("samples", "lm.boot", "loess.boot")
+export("perc.lm", "perc", "one.boot", "two.boot", "pairs.boot")
+       

@@ -1,17 +1,17 @@
-hist.uclaboot           Histograms for bootstrap sampling
+hist.simpleboot         Histograms for bootstrap sampling
                         distributions.
-lm.uclaboot.methods     Methods for linear model bootstrap.
 lm.boot                 Linear model bootstrap.
-loess.uclaboot.methods
-                        Methods for loess bootstrap.
+lm.simpleboot.methods   Methods for linear model bootstrap.
 loess.boot              2-D Loess bootstrap.
+loess.simpleboot.methods
+                        Methods for loess bootstrap.
 one.boot                One sample bootstrap of a univariate
                         statistic.
 pairs.boot              Two sample bootstrap.
 perc                    Extract percentiles from a bootstrap sampling
                         distribution.
-plot.lm.uclaboot        Plot method for linear model bootstraps.
-plot.loess.uclaboot     Plot method for loess bootstraps.
+plot.lm.simpleboot      Plot method for linear model bootstraps.
+plot.loess.simpleboot   Plot method for loess bootstraps.
 samples                 Extract sampling distributions from
                         bootstrapped linear/loess models.
 two.boot                Two sample bootstrap of differences between
