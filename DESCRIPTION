@@ -1,10 +1,10 @@
 Package:  simpleboot
 Version:  1.0-1
-Date:  2003/11/03
+Date:  2004-08-30
 Depends:  R (>= 1.9.0), boot
 Title:  Simple Bootstrap Routines
 Author:  Roger D. Peng <rpeng@jhsph.edu>
 Maintainer:  Roger D. Peng <rpeng@jhsph.edu>
 Description:  Simple bootstrap routines
 License:  GNU GPL (version 2 or later)
-URL:  http://www.sandybox.com/simpleboot/
+URL:  http://www.sandybox.com/software/
