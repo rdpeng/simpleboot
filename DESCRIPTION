@@ -1,7 +1,7 @@
 Package:  simpleboot
 Version:  1.0
 Date:  2003/11/03
-Depends:  R (>= 1.7.1), boot, modreg
+Depends:  R (>= 1.8.0), boot
 Title:  Simple Bootstrap Routines
 Author:  Roger D. Peng <rpeng@jhsph.edu>
 Maintainer:  Roger D. Peng <rpeng@jhsph.edu>
