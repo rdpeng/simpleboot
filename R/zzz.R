@@ -4,5 +4,7 @@
     ver <- as.character(ver)
     cat(paste("Simple Bootstrap Routines (version ", ver, ")\n", sep = ""))
     library(boot)
-    library(modreg)
+
+    if(as.numeric(version$major) <= 1 && as.numeric(version$minor) < 9.0)
+        library(modreg)
 }
