@@ -16,13 +16,9 @@ lo.b <- loess.boot(lo, R = 500)
 ## get sd() from the `stats' package namespace
 sd <- function(...) { stop("error") }
 
-doPlot <- function(lo.b) {
-    postscript(file = "plot-loess-test.eps", height = 7, width = 7)
-    on.exit(dev.off())
-    
-    ## Plot original fit with +/- 2 std. errors
-    plot(lo.b)
-}
-doPlot(lo.b)
+postscript(file = "plot-loess-test.eps", height = 7, width = 7)
+
+## Plot original fit with +/- 2 std. errors
+plot(lo.b)
 
 unlink("plot-loess-test.eps")
