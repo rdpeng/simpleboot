@@ -54,6 +54,29 @@ perc <- function(boot.out, p = c(0.025, 0.975)) {
 
 ########################################################################
 
+library(methods)
+
+setClass("simpleboot",
+         representation(bootObj = "boot",
+                        student = "logical"))
+
+setClass("lmSimpleboot",
+         representation(method = "character",
+                        bootList = "list",
+                        lmOrig = "lm",
+                        newXpts = "data.frame",
+                        weights = "numeric",
+                        R = "numeric"))
+setClass("loessSimpleboot",
+         representation(method = "character",
+                        bootList = "list",
+                        loessOrig = "loess",
+                        newXpts = "data.frame",
+                        weights = "numeric",
+                        R = "numeric"))
+                        
+########################################################################
+
 ## Actual bootstrapping functions
 ## If 'quantile' is bootstrapped, then the 'probs' argument must be set
 
@@ -80,10 +103,11 @@ one.boot <- function(data, FUN, R, student = FALSE, M, weights = NULL, ...) {
     fval
   }
   b <- boot(data, statistic = boot.func, R = R, weights = weights)
-  class(b) <- c("uclaboot", class(b))
-  b$student <- student
-  b
+
+  new("simpleboot", student = student, bootObj = b)
 }
+
+
 
 ## FUN should be some sort of function which takes one argument, like
 ## 'mean' or 'median'.  Same as for the one sample bootstrap.
@@ -118,9 +142,8 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
     weights <- unlist(weights)
   b <- boot(c(sample1, sample2), statistic = boot.func, R = R,
             weights = weights, strata = ind)
-  b$student <- student
-  class(b) <- c("uclaboot", class(b))
-  b
+
+  new("simpleboot", bootObj = b, student = student)
 }
 
 
@@ -164,9 +187,22 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
   }
   b <- boot(data, statistic = boot.func, R = R, weights = weights)
   b$student <- student
-  class(b) <- c("uclaboot", class(b))
-  b
+
+  new("simpleboot", bootObj = b, student = student)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 summary.lm.uclaboot <- function(object, ...) {
   summary.object <- object
