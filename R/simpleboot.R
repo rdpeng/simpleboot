@@ -81,8 +81,8 @@ one.boot <- function(data, FUN, R, student = FALSE, M, weights = NULL, ...) {
     fval
   }
   b <- boot(data, statistic = boot.func, R = R, weights = weights)
-
-  new("simpleboot", student = student, bootObj = b)
+  b$student <- student
+  structure(b, class = "simpleboot")
 }
 
 
@@ -120,8 +120,9 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
     weights <- unlist(weights)
   b <- boot(c(sample1, sample2), statistic = boot.func, R = R,
             weights = weights, strata = ind)
-
-  new("simpleboot", bootObj = b, student = student)
+  b$student <- student
+  b$student <- student
+  structure(b, class = "simpleboot")
 }
 
 
@@ -165,8 +166,7 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
   }
   b <- boot(data, statistic = boot.func, R = R, weights = weights)
   b$student <- student
-
-  new("simpleboot", bootObj = b, student = student)
+  structure(b, class = "simpleboot")
 }
 
 
