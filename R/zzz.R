@@ -9,3 +9,5 @@
     if(!require(boot))
         stop(sQuote("boot"), " library required for ", sQuote("simpleboot"))
 }
+
+.noGenerics <- TRUE
