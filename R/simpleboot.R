@@ -1,6 +1,6 @@
 ## Functions for simple bootstrapping procedures
 ##
-## Copyright 2004 Roger D. Peng <rpeng@jhsph.edu>
+## Copyright 2004-2005 Roger D. Peng <rpeng@jhsph.edu>
 
 ## (6/18/2003) The `two.boot' function was rewritten to (properly) use
 ## the strata argument of `boot'.  This simplifies the two sample
