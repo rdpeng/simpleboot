@@ -26,7 +26,7 @@ one.boot(data, FUN, R, student = FALSE, M, weights = NULL, ...)
   \item{...}{Other (named) arguments that should be passed to \code{FUN}.}
 }
 \value{
-  An object of class \code{"uclaboot"}, which is almost identical to the
+  An object of class \code{"simpleboot"}, which is almost identical to the
   regular \code{"boot"} object.  For example, the \code{boot.ci}
   function can be used on this object.
 }

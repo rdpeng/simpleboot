@@ -20,13 +20,13 @@ perc.lm(lm.boot.obj, p)
   \item{boot.out}{Output from either \code{one.boot}, \code{two.boot},
     or \code{pairs.boot}.}
   \item{p}{numeric vector with values in [0, 1].}
-  \item{lm.boot.obj}{An object of class \code{"lm.uclaboot"},
+  \item{lm.boot.obj}{An object of class \code{"lm.simpleboot"},
     returned from \code{lm.boot}.}
 }
 
 \details{
   \code{perc} automatically calls \code{perc.lm} if \code{boot.out} is
-  of the class \code{"lm.uclaboot"} so there is no need to use
+  of the class \code{"lm.simpleboot"} so there is no need to use
   \code{perc.lm} separately.
 }
 

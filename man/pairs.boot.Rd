@@ -38,7 +38,7 @@ pairs.boot(x, y = NULL, FUN, R, student = FALSE, M, weights = NULL, ...)
 }
 
 \value{
-  An object of class \code{"uclaboot"}, which is almost identical to the
+  An object of class \code{"simpleboot"}, which is almost identical to the
   regular \code{"boot"} object.  For example, the \code{boot.ci}
   function can be used on this object.
 }

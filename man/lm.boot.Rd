@@ -1,6 +1,6 @@
 \name{lm.boot}
 \alias{lm.boot}
-\alias{print.lm.uclaboot}
+\alias{print.lm.simpleboot}
 
 
 \title{
@@ -35,7 +35,7 @@ lm.boot(lm.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100,
 }
 
 \value{
-  An object of class \code{"lm.uclaboot"} (which is a list) containing the
+  An object of class \code{"lm.simpleboot"} (which is a list) containing the
   elements:
   \item{method}{Which method of bootstrapping was used (rows or
     residuals).}
@@ -49,14 +49,14 @@ lm.boot(lm.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100,
 }
 
 \details{
-  Currently, \code{"lm.uclaboot"} objects have a simple \code{print}
+  Currently, \code{"lm.simpleboot"} objects have a simple \code{print}
   method (which shows the original fit), a \code{summary} method and a
   \code{plot} method.
 }
 
 
 \seealso{
-  The \code{plot.lm.uclaboot} method.
+  The \code{plot.lm.simpleboot} method.
 }
 
 

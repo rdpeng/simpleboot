@@ -1,28 +1,28 @@
-\name{lm.uclaboot.methods}
+\name{lm.simpleboot.methods}
 
-\alias{summary.lm.uclaboot}
-\alias{print.summary.lm.uclaboot}
-\alias{fitted.lm.uclaboot}
+\alias{summary.lm.simpleboot}
+\alias{print.summary.lm.simpleboot}
+\alias{fitted.lm.simpleboot}
 
 \title{
   Methods for linear model bootstrap.
 }
 
 \usage{
-\method{summary}{lm.uclaboot}(object, ...)
-\method{print}{summary.lm.uclaboot}(x, ...)
-\method{fitted}{lm.uclaboot}(object, ...)
+\method{summary}{lm.simpleboot}(object, ...)
+\method{print}{summary.lm.simpleboot}(x, ...)
+\method{fitted}{lm.simpleboot}(object, ...)
 }
 
 \description{
-  Methods for \code{"lm.uclaboot"} class objects.  
+  Methods for \code{"lm.simpleboot"} class objects.  
 }
 
 \arguments{
-  \item{object}{An object of class \code{"lm.uclaboot"}, as returned by
+  \item{object}{An object of class \code{"lm.simpleboot"}, as returned by
     \code{lm.boot}.}
-  \item{x}{An object of class \code{"summary.lm.uclaboot"}, a result of
-    a call to \code{summary.lm.uclaboot}.}
+  \item{x}{An object of class \code{"summary.lm.simpleboot"}, a result of
+    a call to \code{summary.lm.simpleboot}.}
   \item{...}{Other arguments passed to and from other methods.}
 }
 

@@ -1,21 +1,21 @@
-\name{loess.uclaboot.methods}
+\name{loess.simpleboot.methods}
 
-\alias{fitted.loess.uclaboot}
+\alias{fitted.loess.simpleboot}
 
 \title{
   Methods for loess bootstrap.
 }
 
 \usage{
-\method{fitted}{loess.uclaboot}(object, ...)
+\method{fitted}{loess.simpleboot}(object, ...)
 }
 
 \description{
-  Methods for \code{"loess.uclaboot"} class objects.
+  Methods for \code{"loess.simpleboot"} class objects.
 }
 
 \arguments{
-  \item{object}{An object of class \code{"loess.uclaboot"} as
+  \item{object}{An object of class \code{"loess.simpleboot"} as
     returned by the function \code{loess.boot}.}
   \item{...}{Other arguments passed to and from other methods.}
 }

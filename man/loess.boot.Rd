@@ -1,6 +1,6 @@
 \name{loess.boot}
 \alias{loess.boot}
-\alias{print.loess.uclaboot}
+\alias{print.loess.simpleboot}
 
 \title{
   2-D Loess bootstrap.
@@ -34,7 +34,7 @@ loess.boot(lo.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100,
 }
 
 \value{
-  An object of class \code{"loess.uclaboot"} (which is a list)
+  An object of class \code{"loess.simpleboot"} (which is a list)
   containing the elements:
   \item{method}{Which method of bootstrapping was used (rows or
     residuals).}
