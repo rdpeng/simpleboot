@@ -52,28 +52,6 @@ perc <- function(boot.out, p = c(0.025, 0.975)) {
   out
 }
 
-########################################################################
-
-library(methods)
-
-setClass("simpleboot",
-         representation(bootObj = "boot",
-                        student = "logical"))
-
-setClass("lmSimpleboot",
-         representation(method = "character",
-                        bootList = "list",
-                        lmOrig = "lm",
-                        newXpts = "data.frame",
-                        weights = "numeric",
-                        R = "numeric"))
-setClass("loessSimpleboot",
-         representation(method = "character",
-                        bootList = "list",
-                        loessOrig = "loess",
-                        newXpts = "data.frame",
-                        weights = "numeric",
-                        R = "numeric"))
                         
 ########################################################################
 
