@@ -11,5 +11,4 @@ S3method("fitted", "loess.simpleboot")
 export("samples", "lm.boot", "loess.boot")
 export("perc.lm", "perc", "one.boot", "two.boot", "pairs.boot")
        
-## import("boot", "modreg")
 import(stats)
