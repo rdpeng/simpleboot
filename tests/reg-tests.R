@@ -1,6 +1,8 @@
 ## Regression tests for `simpleboot'.
 ## Added 2004-10-15
 
+library(simpleboot)
+
 set.seed(1234)
 x <- runif(100)
 
