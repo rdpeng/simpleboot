@@ -1,10 +1,10 @@
 hist.uclaboot           Histograms for bootstrap sampling
                         distributions.
-lm.boot                 Linear model bootstrap.
 lm.uclaboot.methods     Methods for linear model bootstrap.
-loess.boot              2-D Loess bootstrap.
+lm.boot                 Linear model bootstrap.
 loess.uclaboot.methods
                         Methods for loess bootstrap.
+loess.boot              2-D Loess bootstrap.
 one.boot                One sample bootstrap of a univariate
                         statistic.
 pairs.boot              Two sample bootstrap.
