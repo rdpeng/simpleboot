@@ -272,7 +272,7 @@ lm.boot <- function(lm.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100,
 lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
   boot.list <- vector("list", length = R)
   names(boot.list) <- as.character(1:R)
-  beta <- coef(lm.object)
+  yhat <- predict(lm.object)
   f <- formula(lm.object)
   mframe <- model.frame(lm.object)
   nobs <- nrow(mframe)
@@ -284,14 +284,14 @@ lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
     }
     else {
       mf <- model.frame(lm.object)
-      mm <- model.matrix(lm.object)
       rstar <- sample(residuals(lm.object), replace = TRUE,
                       prob = weights)
 
       ## Generate new responses with resampled residuals
-      mf[[attr(terms(lm.object), "response")]] <- mm %*% beta + rstar
+      mf[[attr(terms(lm.object), "response")]] <- yhat + rstar
     }
-    rs.lm <- lm(f, data = mf)
+    ## rs.lm <- lm(f, data = mf)
+    rs.lm <- update(lm.object, data = mf)
     
     rss <- sum(residuals(rs.lm)^2)
     y <- mf[[attr(terms(lm.object), "response")]]

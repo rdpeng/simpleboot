@@ -1,10 +1,9 @@
+fitted.loess.simpleboot
+                        Methods for loess bootstrap.
 hist.simpleboot         Histograms for bootstrap sampling
                         distributions.
 lm.boot                 Linear model bootstrap.
-lm.simpleboot.methods   Methods for linear model bootstrap.
 loess.boot              2-D Loess bootstrap.
-loess.simpleboot.methods
-                        Methods for loess bootstrap.
 one.boot                One sample bootstrap of a univariate
                         statistic.
 pairs.boot              Two sample bootstrap.
@@ -14,5 +13,6 @@ plot.lm.simpleboot      Plot method for linear model bootstraps.
 plot.loess.simpleboot   Plot method for loess bootstraps.
 samples                 Extract sampling distributions from
                         bootstrapped linear/loess models.
+summary.lm.simpleboot   Methods for linear model bootstrap.
 two.boot                Two sample bootstrap of differences between
                         univariate statistics.

@@ -3,8 +3,7 @@
     ver <- read.dcf(file.path(lib, pkg, "DESCRIPTION"), "Version")
     ver <- as.character(ver)
     cat(paste("Simple Bootstrap Routines (version ", ver, ")\n", sep = ""))
-    library(boot)
-
-    if(as.numeric(version$major) <= 1 && as.numeric(version$minor) < 9.0)
-        library(modreg)
+    if(!require(boot))
+        stop(sQuote("boot"), " library required for ", sQuote("simpleboot"))
+    library(stats)
 }
