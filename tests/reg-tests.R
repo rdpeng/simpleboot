@@ -8,7 +8,6 @@ x <- runif(100)
 
 ## Simple sine function simulation
 y <- sin(2*pi*x) + .2 * rnorm(100)
-plot(x, y)  ## Sine function with noise
 lo <- loess(y ~ x, span = .4)
 
 ## Bootstrap with resampling of rows
@@ -20,10 +19,12 @@ sd <- function(...) { stop("error") }
 
 doPlot <- function() {
   postscript("plot-loess-test.eps", height = 7, width = 7)
-
+  on.exit(dev.off())
+  
   ## Plot original fit with +/- 2 std. errors
   plot(lo.b)
-  dev.off()
 }
+
+doPlot()
 
 unlink("plot-loess-test.eps")
