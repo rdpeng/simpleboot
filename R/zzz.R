@@ -6,6 +6,6 @@
 
 .onLoad <- function(lib, pkg) {
     if(!require(boot))
-        stop(sQuote("boot"), " library required for ", sQuote("simpleboot"))
+        stop(sQuote("boot"), " package required for ", sQuote("simpleboot"))
 }
 
