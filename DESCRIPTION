@@ -2,7 +2,7 @@ Package:  simpleboot
 Version:  1.1
 Date:  2004-10-05
 LazyLoad:  yes
-Depends:  R (>= 2.0.0), boot
+Depends:  R (>= 2.0.0), boot, stats
 Title:  Simple Bootstrap Routines
 Author:  Roger D. Peng <rpeng@jhsph.edu>
 Maintainer:  Roger D. Peng <rpeng@jhsph.edu>
