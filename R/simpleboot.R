@@ -15,7 +15,7 @@
 hist.simpleboot <- function(x, do.rug = FALSE, xlab = "Bootstrap samples",
                           main = "", ...) {
   if(!inherits(x, "simpleboot"))
-    stop("Only use on 'simpleboot' objects!")
+    stop("Only use on ", sQuote("simpleboot"), " objects!")
   hist(x$t[, 1], xlab = xlab, main = main, ...)
   if(do.rug)
     rug(x$t[, 1])
@@ -41,9 +41,9 @@ perc <- function(boot.out, p = c(0.025, 0.975)) {
   if(inherits(boot.out, "lm.simpleboot"))
     return( perc.lm(boot.out, p) )
   if(!inherits(boot.out, "simpleboot"))
-    stop("Only use this function on 'simpleboot' objects!")    
+    stop("Only use this function on ", sQuote("simpleboot"), " objects!")
   if(any(p < 0) || any(p > 1))
-    stop("Probabilities in 'p' must be between 0 and 1")
+    stop("Probabilities in ", sQuote("p"), " must be between 0 and 1")
   if(!is.null(boot.out$student) && boot.out$student)
     x <- boot.out$t[, 1, drop = FALSE]
   else
@@ -64,7 +64,8 @@ one.boot <- function(data, FUN, R, student = FALSE, M, weights = NULL, ...) {
   
   if(func.name == "quantile") {
     if(is.na(match("probs", names(extra))))
-      stop("The 'probs' argument must be specified in order to use 'quantile' function")
+      stop("The ", sQuote("probs"), " argument must be specified in order to use ",
+           sQuote("quantile"), " function")
     if(length(extra$probs) > 1)
       stop("Can only bootstrap a single quantile")
   }
@@ -100,7 +101,9 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
 
   if(func.name == "quantile") {
     if(is.na(match("probs", names(extra))))
-      stop("The 'probs' argument must be specified in order to use 'quantile' function")
+      stop("The ", sQuote("probs"),
+           " argument must be specified in order to use ", sQuote("quantile"),
+           " function")
     if(length(extra$probs) > 1)
       stop("Can only bootstrap a single quantile")
   }
@@ -139,16 +142,17 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
   
   if(is.null(y)) {
     if(!is.matrix(x) && !is.data.frame(x))
-      stop("Argument 'x' must either be a matrix or a data frame")
+      stop("Argument ", sQuote('x'), " must either be a matrix or a data frame")
     data <- x
   }
   else {
     if(length(x) != length(y))
-      stop("The length of 'x' must equal the length of 'y'")
+      stop("The length of ", sQuote('x'), " must equal the length of ",
+           sQuote('y'), "")
     data <- cbind(x, y)
   }
   if(student && missing(M))
-    stop("Need to specify 'M' for studentized bootstrap")
+    stop("Need to specify ", sQuote('M'), " for studentized bootstrap")
   
   boot.func <- function(x, idx) {
     rs.x <- x[idx, ]
@@ -240,12 +244,12 @@ samples <- function(object, name = c("fitted", "coef", "rsquare", "rss")) {
   name <- match.arg(name)
   
   if(!inherits(object, c("lm.simpleboot", "loess.simpleboot")))
-    stop("Only use with 'lm.simpleboot' or 'loess.simpleboot' object")
+    stop("Only use with " sQuote('lm.simpleboot'), " or ",
+         sQuote('loess.simpleboot'), " object")
   boot.list <- object$boot.list
   
   if(is.null(boot.list[[1]][[name]]))
-    stop(paste("Bootstrap model does not have '", name, "' values",
-               sep =""))
+    stop("Bootstrap model does not have ", sQuote(name)," values")
   sapply(boot.list, "[[", name)
 }
 
