@@ -244,7 +244,7 @@ samples <- function(object, name = c("fitted", "coef", "rsquare", "rss")) {
   name <- match.arg(name)
   
   if(!inherits(object, c("lm.simpleboot", "loess.simpleboot")))
-    stop("Only use with " sQuote('lm.simpleboot'), " or ",
+    stop("Only use with ", sQuote('lm.simpleboot'), " or ",
          sQuote('loess.simpleboot'), " object")
   boot.list <- object$boot.list
   
