@@ -3,6 +3,7 @@ Version:  1.1-2
 Date:  2007-02-28
 LazyLoad:  yes
 Depends:  R (>= 2.4.1), boot
+Imports:  stats
 Title:  Simple Bootstrap Routines
 Author:  Roger D. Peng <rpeng@jhsph.edu>
 Maintainer:  Roger D. Peng <rpeng@jhsph.edu>
