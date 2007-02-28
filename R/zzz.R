@@ -1,11 +1,12 @@
 .onAttach <- function(lib, pkg) {
-    ver <- read.dcf(file.path(lib, pkg, "DESCRIPTION"), "Version")
-    ver <- as.character(ver)
-    cat(paste("Simple Bootstrap Routines (version ", ver, ")\n", sep = ""))
+    dcf <- read.dcf(file.path(lib, pkg, "DESCRIPTION"))
+    msg <- gettextf("%s (%s %s)", dcf[, "Title"],
+                    as.character(dcf[, "Version"]), dcf[, "Date"])
+    message(paste(strwrap(msg), collapse = "\n"))
 }
 
 .onLoad <- function(lib, pkg) {
     if(!require(boot))
-        stop(sQuote("boot"), " package required for ", sQuote("simpleboot"))
+        stop("'boot' package required")
 }
 
