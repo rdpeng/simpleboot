@@ -1,6 +1,7 @@
 
-R : Copyright 2004, The R Foundation for Statistical Computing
-Version 2.0.0  (2004-10-04), ISBN 3-900051-07-0
+R version 2.4.1 Patched (2007-02-26 r40806)
+Copyright (C) 2007 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -11,15 +12,15 @@ Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
 
 Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for a HTML browser interface to help.
+'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
 > ## Regression tests for `simpleboot'.
 > ## Added 2004-10-15
 > 
 > library(simpleboot)
-Loading required package: boot 
-Simple Bootstrap Routines (version 1.1-1)
+Loading required package: boot
+Simple Bootstrap Routines (1.1-2 2007-02-28)
 > 
 > set.seed(1234)
 > x <- runif(100)
