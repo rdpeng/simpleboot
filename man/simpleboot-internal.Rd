@@ -11,7 +11,7 @@
 \usage{
 lm.boot.resample(lm.object, R, rows, new.xpts, weights)
 lo.boot.resample(lo.object, R, rows, new.xpts, weights)
-model.frame.lm.simpleboot(formula, ...)
+\S3method{model.frame}{lm.simpleboot}(formula, ...)
 }
 \details{
   This functions are not to be called by the user.
