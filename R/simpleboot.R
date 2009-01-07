@@ -340,11 +340,16 @@ print.loess.simpleboot <- function(x, ...) {
         print(x$orig.loess)
 }
 
-loess.boot <- function(lo.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100, weights = NULL) {
+loess.boot <- function(lo.object, R, rows = TRUE, new.xpts = NULL,
+                       ngrid = 100, weights = NULL) {
         boot.result <- list()
 
-        if(is.null(new.xpts))
-                new.xpts <- seq(min(lo.object$x), max(lo.object$x), len = ngrid)
+        if(is.null(new.xpts)) {
+                new.xpts <- data.frame(seq(min(lo.object$x),
+                                           max(lo.object$x),
+                                           len = ngrid))
+                names(new.xpts) <- colnames(lo.object$x)
+        }
         if(is.null(weights))
                 weights <- rep(1, length(lo.object$x))
         boot.list <- lo.boot.resample(lo.object, R, rows, new.xpts, weights)
