@@ -372,20 +372,21 @@ lo.boot.resample <- function(lo.object, R, rows, new.xpts, weights) {
         orig.data <- data.frame(lo.object$y, lo.object$x)
         names(orig.data) <- all.vars(f)
         ## Assumes that response is first name and predictor is second name
-        
+
         boot.list <- vector("list", length = R)
-        names(boot.list) <- as.character(1:R)
+        names(boot.list) <- as.character(seq_len(R))
 
         for(i in 1:R) {
                 if(rows) {
-                        boot.idx <- sample(1:nrow(orig.data), rep = TRUE, prob = weights)
+                        boot.idx <- sample(seq_len(nrow(orig.data)),
+                                           replace = TRUE, prob = weights)
                         mf <- orig.data[boot.idx, ]
                 }
                 else {
                         xorig <- lo.object$x
                         yorig <- lo.object$y
                         res <- yorig - fitted(lo.object)
-                        boot.res <- sample(res, rep = TRUE, prob = weights)
+                        boot.res <- sample(res, replace = TRUE, prob = weights)
                         yboot <- xorig + boot.res
                         mf <- data.frame(yboot, xorig)
                         names(mf) <- all.vars(f)
