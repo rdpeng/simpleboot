@@ -5,8 +5,3 @@
     packageStartupMessage(paste(strwrap(msg), collapse = "\n"))
 }
 
-.onLoad <- function(lib, pkg) {
-    if(!require(boot))
-        stop("'boot' package required")
-}
-
