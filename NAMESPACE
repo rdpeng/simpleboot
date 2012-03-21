@@ -13,3 +13,4 @@ export("perc.lm", "perc", "one.boot", "two.boot", "pairs.boot")
        
 import(stats)
 import(graphics)
+import(boot)
