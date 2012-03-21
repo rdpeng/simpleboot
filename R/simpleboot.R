@@ -18,7 +18,6 @@ hist.simpleboot <- function(x, do.rug = FALSE, xlab = "Bootstrap samples",
         if(do.rug)
                 rug(x$t[, 1])
         abline(v = ifelse(is.matrix(x$t0), x$t0[,1], x$t0[1]), col = 2, lty=3)
-
         invisible()
 }
 
@@ -46,8 +45,7 @@ perc <- function(boot.out, p = c(0.025, 0.975)) {
                 x <- boot.out$t[, 1, drop = FALSE]
         else
                 x <- boot.out$t
-        out <- drop(apply(x, 2, quantile, probs = p))
-        out
+        drop(apply(x, 2, quantile, probs = p))
 }
 
 
@@ -59,7 +57,7 @@ perc <- function(boot.out, p = c(0.025, 0.975)) {
 one.boot <- function(data, FUN, R, student = FALSE, M, weights = NULL, ...) {
         func.name <- ifelse(is.character(FUN), FUN, deparse(substitute(FUN)))
         extra <- list(...)
-        
+
         if(func.name == "quantile") {
                 if(is.na(match("probs", names(extra))))
                         stop("'probs' argument must be specified")
@@ -67,13 +65,13 @@ one.boot <- function(data, FUN, R, student = FALSE, M, weights = NULL, ...) {
                         stop("can only bootstrap a single quantile")
         }
         func <- match.fun(FUN)
-
         boot.func <- function(x, idx) {
                 fval <- func(x[idx], ...)
 
                 if(student) {
                         rs.x <- x[idx]
-                        b <- one.boot(rs.x, FUN, R = M, student = FALSE, M = NULL, weights = NULL, ...)
+                        b <- one.boot(rs.x, FUN, R = M, student = FALSE,
+                                      M = NULL, weights = NULL, ...)
                         fval <- c(fval, var(b$t))
                 }
                 fval
@@ -108,8 +106,8 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
                 fval <- func(d1, ...) - func(d2, ...)
 
                 if(student) {
-                        b <- two.boot(d1, d2, FUN, R = M, student = FALSE, M = NULL,
-                                      weights = NULL, ...) 
+                        b <- two.boot(d1, d2, FUN, R = M, student = FALSE,
+                                      M = NULL, weights = NULL, ...) 
                         fval <- c(fval, var(b$t))
                 }
                 fval
@@ -118,7 +116,6 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
                 weights <- unlist(weights)
         b <- boot(c(sample1, sample2), statistic = boot.func, R = R,
                   weights = weights, strata = ind)
-        b$student <- student
         b$student <- student
         structure(b, class = "simpleboot")
 }
@@ -147,7 +144,6 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
         }
         if(student && missing(M))
                 stop("need to specify 'M' for studentized bootstrap")
-        
         boot.func <- function(x, idx) {
                 rs.x <- x[idx, ]
 
@@ -156,8 +152,9 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
                 else 
                         fval <- func(rs.x[,1], rs.x[,2], ...)
                 if(student) {
-                        b <- pairs.boot(rs.x[,1], rs.x[,2], FUN, M, student = FALSE,
-                                        M = NULL, weights = NULL, ...)
+                        b <- pairs.boot(rs.x[,1], rs.x[,2], FUN, M,
+                                        student = FALSE, M = NULL,
+                                        weights = NULL, ...)
                         fval <- c(fval, var(b$t))
                 }
                 fval
@@ -167,38 +164,24 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
         structure(b, class = "simpleboot")
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 summary.lm.simpleboot <- function(object, ...) {
         summary.object <- object
         class(summary.object) <- "summary.lm.simpleboot"
         params <- sapply(object$boot.list, "[[", "coef")        
         summary.object$stdev.params <- apply(params, 1, sd)
-
         summary.object
 }
 
 print.summary.lm.simpleboot <- function(x, ...) {    
         print.lm.simpleboot(x)
-        
         cat("Bootstrap SD's:\n")
         print.default(format(x$stdev.params), print.gap = 2, quote = FALSE)
         cat("\n")
 }
 
 print.lm.simpleboot <- function(x, ...) {
-        cat("BOOTSTRAP OF LINEAR MODEL  (method = ", x$method, ")\n\n", sep = "")
+        cat("BOOTSTRAP OF LINEAR MODEL  (method = ", x$method, ")\n\n",
+            sep = "")
         cat("Original Model Fit\n")
         cat("------------------")
         print(x$orig.lm)
@@ -220,7 +203,7 @@ plot.lm.simpleboot <- function(x, add = FALSE, ...) {
         std <- apply(bmat, 1, sd, na.rm = T)
         mask.response <- -attr(terms(x$orig.lm), "response")
         orig.pred <- predict(x$orig.lm, xpts)
-        
+
         if(!add) {
                 mf <- model.frame(x)        
                 xdata <- mf[, mask.response]
@@ -230,7 +213,6 @@ plot.lm.simpleboot <- function(x, add = FALSE, ...) {
         abline(x$orig.lm)
         lines(xpts[,1], orig.pred + 2*std, lty=3)
         lines(xpts[,1], orig.pred - 2*std, lty=3)
-
         invisible()          
 }
 
@@ -242,7 +224,8 @@ samples <- function(object, name = c("fitted", "coef", "rsquare", "rss")) {
         boot.list <- object$boot.list
         
         if(is.null(boot.list[[1]][[name]]))
-                stop(gettextf("bootstrap model does not have '%s' values", name))
+                stop(gettextf("bootstrap model does not have '%s' values",
+                              name))
         sapply(boot.list, "[[", name)
 }
 
@@ -253,13 +236,13 @@ lm.boot <- function(lm.object, R, rows = TRUE, new.xpts = NULL, ngrid = 100,
         if(ncol(orig.data) == 2 && is.null(new.xpts)) {
                 mask.response <- -attr(terms(lm.object), "response")
                 range.x <- range(orig.data[, mask.response])
-                new.xpts <- data.frame(seq(range.x[1], range.x[2], len = ngrid))
+                new.xpts <- data.frame(seq(range.x[1], range.x[2],
+                                           len = ngrid))
                 names(new.xpts) <- names(orig.data)[mask.response]
         }
         if(is.null(weights))
                 weights <- rep(1, NROW(orig.data))
         boot.list <- lm.boot.resample(lm.object, R, rows, new.xpts, weights)
-        
         structure(list(method = ifelse(rows, "rows", "residuals"),
                        boot.list = boot.list, orig.lm = lm.object,
                        new.xpts = new.xpts, weights = weights),
@@ -276,7 +259,8 @@ lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
 
         for(i in 1:R) {
                 if(rows) {
-                        boot.idx <- sample(1:nobs, replace = TRUE, prob = weights)
+                        boot.idx <- sample(1:nobs, replace = TRUE,
+                                           prob = weights)
                         mf <- mframe[boot.idx, ]
                 }
                 else {
@@ -287,19 +271,15 @@ lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
                         ## Generate new responses with resampled residuals
                         mf[[attr(terms(lm.object), "response")]] <- yhat + rstar
                 }
-                ## rs.lm <- lm(f, data = mf)
                 rs.lm <- update(lm.object, data = mf)
-                
                 rss <- sum(residuals(rs.lm)^2)
                 y <- mf[[attr(terms(lm.object), "response")]]
                 syy <- sum(y^2)
-
-                rval <- list(coef = coef(rs.lm), rss = rss, rsquare = (syy - rss) / syy,
+                rval <- list(coef = coef(rs.lm), rss = rss,
+                             rsquare = (syy - rss) / syy,
                              rstderr = sqrt(rss / (nobs - rs.lm$rank)))
-
                 if(!is.null(new.xpts))
                         rval$fitted <- predict(rs.lm, newdata = new.xpts)
-
                 boot.list[[i]] <- rval
         }
         boot.list
@@ -312,7 +292,7 @@ plot.loess.simpleboot <- function(x, add = FALSE, all.lines = FALSE, ...) {
         bmat <- sapply(x$boot.list, "[[", "fitted")
         std <- apply(bmat, 1, sd, na.rm = TRUE)
         orig.pred <- predict(x$orig.loess, data.frame(xpts))
-        
+
         if(!add) {
                 xdata <- x$orig.loess$x
                 ydata <- x$orig.loess$y
@@ -326,8 +306,8 @@ plot.loess.simpleboot <- function(x, add = FALSE, all.lines = FALSE, ...) {
         }
         else {
                 blist <- x$boot.list
-                
-                for(i in 1:(x$R)) 
+
+                for(i in seq_len(x$R))
                         lines(xpts, blist[[i]]$fitted)
         }
         invisible()          
@@ -345,15 +325,14 @@ loess.boot <- function(lo.object, R, rows = TRUE, new.xpts = NULL,
         boot.result <- list()
 
         if(is.null(new.xpts)) {
-                new.xpts <- data.frame(seq(min(lo.object$x),
-                                           max(lo.object$x),
+                new.xpts <- data.frame(seq(min(lo.object$x), max(lo.object$x),
                                            len = ngrid))
                 names(new.xpts) <- colnames(lo.object$x)
         }
         if(is.null(weights))
                 weights <- rep(1, length(lo.object$x))
         boot.list <- lo.boot.resample(lo.object, R, rows, new.xpts, weights)
-        
+
         boot.result$method <- ifelse(rows, "rows", "residuals")
         boot.result$boot.list <- boot.list
         boot.result$orig.loess <- lo.object
