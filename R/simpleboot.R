@@ -290,25 +290,25 @@ lm.boot.resample <- function(lm.object, R, rows, new.xpts, weights) {
 plot.loess.simpleboot <- function(x, add = FALSE, all.lines = FALSE, ...) {
         xpts <- x$new.xpts    
         bmat <- sapply(x$boot.list, "[[", "fitted")
-        std <- apply(bmat, 1, sd, na.rm = TRUE)
+        std <- apply(bmat, 1, stats::sd, na.rm = TRUE)
         orig.pred <- predict(x$orig.loess, data.frame(xpts))
 
         if(!add) {
-                xdata <- x$orig.loess$x
-                ydata <- x$orig.loess$y
+                xdata <- drop(x$orig.loess$x)
+                ydata <- drop(x$orig.loess$y)
                 plot(xdata, ydata, ...)
         }
-        lines(xpts, orig.pred)
+        lines(xpts$x, orig.pred)
 
         if(!all.lines) {
-                lines(xpts, orig.pred + 2*std, lty=3)
-                lines(xpts, orig.pred - 2*std, lty=3)
+                lines(xpts$x, orig.pred + 2*std, lty=3)
+                lines(xpts$x, orig.pred - 2*std, lty=3)
         }
         else {
                 blist <- x$boot.list
 
                 for(i in seq_len(x$R))
-                        lines(xpts, blist[[i]]$fitted)
+                        lines(xpts$x, blist[[i]]$fitted)
         }
         invisible()          
 }
