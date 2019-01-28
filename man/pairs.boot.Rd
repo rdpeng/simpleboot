@@ -44,6 +44,7 @@ pairs.boot(x, y = NULL, FUN, R, student = FALSE, M, weights = NULL, ...)
 }
 
 \examples{
+library(boot)
 set.seed(1)
 x <- rnorm(100)
 y <- 2 * x + rnorm(100)

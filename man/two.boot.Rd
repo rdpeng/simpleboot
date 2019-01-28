@@ -47,6 +47,7 @@ two.boot(sample1, sample2, FUN, R, student = FALSE, M, weights = NULL, ...)
 }
 
 \examples{
+library(boot)
 set.seed(50)
 x <- rnorm(100, 1)  ## Mean 1 normals
 y <- rnorm(100, 0)  ## Mean 0 normals

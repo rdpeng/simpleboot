@@ -31,6 +31,7 @@ one.boot(data, FUN, R, student = FALSE, M, weights = NULL, ...)
   function can be used on this object.
 }
 \examples{
+library(boot)
 set.seed(20)
 x <- rgamma(100, 1)
 b.mean <- one.boot(x, mean, 1000)
