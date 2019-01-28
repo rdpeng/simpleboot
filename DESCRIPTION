@@ -6,6 +6,6 @@ Imports:  boot, stats, graphics
 Title:  Simple Bootstrap Routines
 Author:  Roger D. Peng <rpeng@jhsph.edu>
 Maintainer:  Roger D. Peng <rpeng@jhsph.edu>
-Description:  Simple bootstrap routines
+Description:  Simple bootstrap routines.
 License:  GPL (>= 2)
 URL: https://github.com/rdpeng/simpleboot
