@@ -120,7 +120,6 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
         structure(b, class = "simpleboot")
 }
 
-
 ## x and y should either be vectors, or x can be a two-column matrix
 ## There are two options for FUN.
 ## (a) FUN takes to arguments:  FUN <- function(x, y) { ... }
@@ -128,7 +127,7 @@ two.boot <- function(sample1, sample2, FUN, R, student = FALSE, M,
 ##     two-column data frame:
 ##     FUN <- function(x) { ... }
 
-pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
+pairs_boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
                        weights = NULL, ...) {
         func <- match.fun(FUN)
         
@@ -152,7 +151,7 @@ pairs.boot <- function(x, y = NULL, FUN, R, student = FALSE, M,
                 else 
                         fval <- func(rs.x[,1], rs.x[,2], ...)
                 if(student) {
-                        b <- pairs.boot(rs.x[,1], rs.x[,2], FUN, M,
+                        b <- pairs_boot(rs.x[,1], rs.x[,2], FUN, M,
                                         student = FALSE, M = NULL,
                                         weights = NULL, ...)
                         fval <- c(fval, var(b$t))

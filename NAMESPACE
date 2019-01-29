@@ -9,8 +9,9 @@ S3method("plot", "loess.simpleboot")
 S3method("print", "loess.simpleboot")
 S3method("fitted", "loess.simpleboot")
 export("samples", "lm.boot", "loess.boot")
-export("perc.lm", "perc", "one.boot", "two.boot", "pairs.boot")
-       
+export("perc.lm", "perc", "one.boot", "two.boot")
+export("pairs_boot")
+
 import(stats)
 import(graphics)
 import(boot)

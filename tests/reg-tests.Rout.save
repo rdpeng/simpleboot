@@ -1,7 +1,7 @@
 
-R version 2.4.1 Patched (2007-02-26 r40806)
-Copyright (C) 2007 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
+R version 3.5.2 Patched (2019-01-10 r75975) -- "Eggshell Igloo"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin18.2.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -19,8 +19,7 @@ Type 'q()' to quit R.
 > ## Added 2004-10-15
 > 
 > library(simpleboot)
-Loading required package: boot
-Simple Bootstrap Routines (1.1-2 2007-02-28)
+Simple Bootstrap Routines (1.1-6)
 > 
 > set.seed(1234)
 > x <- runif(100)
@@ -48,3 +47,6 @@ Simple Bootstrap Routines (1.1-2 2007-02-28)
 > 
 > unlink("plot-loess-test.eps")
 > 
+> proc.time()
+   user  system elapsed 
+  0.674   0.034   0.697 
