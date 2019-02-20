@@ -34,7 +34,7 @@ samples(object, name = c("fitted", "coef", "rsquare", "rss"))
 data(airquality)
 attach(airquality)
 lmodel <- lm(Ozone ~ Solar.R + Wind)
-lboot <- lm.boot(lmodel, R = 500)
+lboot <- lm.boot(lmodel, R = 100)
 
 ## Get sampling distributions for coefficients
 s <- samples(lboot, "coef")
