@@ -1,5 +1,5 @@
 Package:  simpleboot
-Version:  1.1-6
+Version:  1.1-7
 Depends:  R (>= 2.14.0)
 Imports:  boot, stats, graphics
 Title:  Simple Bootstrap Routines

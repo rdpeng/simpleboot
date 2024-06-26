@@ -19,7 +19,7 @@ Type 'q()' to quit R.
 > ## Added 2004-10-15
 > 
 > library(simpleboot)
-Simple Bootstrap Routines (1.1-6)
+Simple Bootstrap Routines (1.1-7)
 > 
 > set.seed(1234)
 > x <- runif(100)
@@ -49,4 +49,4 @@ Simple Bootstrap Routines (1.1-6)
 > 
 > proc.time()
    user  system elapsed 
-  0.674   0.034   0.697 
+  0.614   0.032   0.636 
